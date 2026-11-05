@@ -1,0 +1,30 @@
+# Schema is the API contract. ! means non-null; [Account!]! is a
+# non-null list with non-null items. An empty list is still valid.
+type Query {
+    # Retrieve the complete in-memory account collection.
+    accounts: [Account!]!
+    # Nullable result: unknown IDs return null instead of a made-up account.
+    account(id: ID!): Account
+}
+
+type Mutation {
+    # New accounts begin with zero balance and no transactions.
+    createAccount(owner: String!): Account!
+}
+
+type Account {
+    id: ID!
+    owner: String!
+    # GraphQL Int is a signed 32-bit integer; cents avoid floating point errors.
+    # For larger monetary ranges, define a decimal or long custom scalar.
+    balanceInCents: Int!
+    # Resolved separately through @SchemaMapping, only when selected.
+    transactions: [Transaction!]!
+}
+
+type Transaction {
+    id: ID!
+    accountId: ID!
+    description: String!
+    amountInCents: Int!
+}

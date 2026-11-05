@@ -1,0 +1,28 @@
+# Run ONE operation at a time in GraphiQL, or choose an operation by name.
+query AllAccounts {
+  accounts { id owner balanceInCents }
+}
+
+# Nested fields are resolved only when selected.
+query AccountWithTransactions {
+  account(id: "1") {
+    id owner balanceInCents
+    transactions { id description amountInCents }
+  }
+}
+
+mutation CreateAccount {
+  createAccount(owner: "New Customer") {
+    id owner balanceInCents transactions { id }
+  }
+}
+
+# Variables panel: {"id":"1"}
+query AccountById($id: ID!) {
+  account(id: $id) { id owner }
+}
+
+# Expected: {"data":{"account":null}}
+query MissingAccount {
+  account(id: "999") { id owner }
+}

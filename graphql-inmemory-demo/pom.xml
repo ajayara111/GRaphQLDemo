@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <!-- Spring Boot manages compatible dependency and plugin versions. -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.3.5</version>
+    <relativePath/>
+  </parent>
+  <groupId>com.example</groupId>
+  <artifactId>graphql-inmemory-demo</artifactId>
+  <version>1.0.0</version>
+  <properties>
+    <!-- Records require a modern JDK; use Java 17 or newer. -->
+    <java.version>17</java.version>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
+  </properties>
+  <dependencies>
+    <!-- Schema loading, query execution and annotated resolvers. -->
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-graphql</artifactId></dependency>
+    <!-- Serves the /graphql HTTP endpoint and GraphiQL page. -->
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
+  </dependencies>
+  <build><plugins>
+    <!-- Supports spring-boot:run and executable JAR packaging. -->
+    <plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin>
+  </plugins></build>
+</project>
